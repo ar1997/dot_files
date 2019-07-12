@@ -1,0 +1,3 @@
+URxvt*geometry: 100x30
+
+URxvt*scrollBar: false
