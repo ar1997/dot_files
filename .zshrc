@@ -111,7 +111,7 @@ export IPFS_PATH=$HOME/.ipfs
 
 	(cat ~/.cache/wal/sequences &)
 
-# # Alternative (blocks terminal for 0-3ms)
+## Alternative (blocks terminal for 0-3ms)
 
 	cat ~/.cache/wal/sequences
 
@@ -120,3 +120,7 @@ export IPFS_PATH=$HOME/.ipfs
 	source ~/.cache/wal/colors-tty.sh
 
 
+##Fix locale issues by setting them here
+
+	export LANG=en_US.UTF-8
+	export LC_MESSAGES="C"
