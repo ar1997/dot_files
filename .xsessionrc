@@ -1,0 +1,10 @@
+#use --list --get-props to get m/c specific details and replace below
+
+#mouse pointer accel
+xinput --set-prop 12 321 0.000000
+
+#two fing scroll
+xinput --set-prop 12 314 1 0 0
+
+#disable touchpad while typing
+xinput --set-prop 12 311 1
