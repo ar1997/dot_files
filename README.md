@@ -1,6 +1,4 @@
-# My_Dot_Files
-My config
+# dot_files
 
-Just my config files
-Xdefaults
-Zshrc
+
+
