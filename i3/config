@@ -33,8 +33,8 @@
 
 # start a terminal
 
-	bindsym $mod+Return exec --no-startup-id xst
-
+	bindsym $mod+Return exec --no-startup-id konsole --hide-menubar 
+#	bindsym $mod+Return exec --no-startup-id cool-retro-term
 # kill focused window
 
 	bindsym $mod+Shift+q kill
@@ -42,7 +42,7 @@
 
 # start rofi instead of dmenu (a program launcher) 	
 	         
-	bindsym $mod+d exec rofi -show run -width 20 -hide-scrollbar -font "Courier 12" -theme arthur
+	bindsym $mod+d exec --no-startup-id rofi -show run -width 20 -hide-scrollbar -font "Courier 10" -theme Monokai
 
 #gruvbox-dark-hard
 
@@ -201,9 +201,14 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
-#	bar {
-#        	status_command i3status
-#	}	
+	bar {
+       		status_command LC_ALL=C i3status 
+		#--config ~/.config/i3/.i3status.conf
+		tray_padding 2
+	#	fonto pango:Courier bold 7
+	#	seperator_symbol "|"
+		position top
+	}	
 
 # Fonts
 
@@ -211,14 +216,21 @@ font pango:Noto Mono Regular 13
 
 # Brightness Control
 
-	bindsym XF86MonBrightnessUp exec --no-startup-id light -A 1;
-	bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1;
+	bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10;
+	bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10;
 
 # Volume Control
 
-	bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
-	bindsym XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 5%+
-	bindsym XF86AudioLowerVolume exec --no-startup-id amixer sset Master 5%-
+# PA
+#	bindsym $mod+shift+m exec --no-startup-id pamixer -t
+#	bindsym $mod+shift+p exec --no-startup-id pamixer -i 10
+#	bindsym $mod+shift+o exec --no-startup-id pamixer -d 10
+
+# ALSA
+
+	bindsym $mod+shift+i exec --no-startup-id amixer -q sset Master toggle
+	bindsym $mod+shift+p exec --no-startup-id amixer -q sset Master 5%+
+	bindsym $mod+shift+o exec --no-startup-id amixer -q sset Master 5%-
 
 # Hide those titlebars
 
@@ -226,57 +238,114 @@ font pango:Noto Mono Regular 13
 
 # For i3 gaps
 
-	gaps inner 08
-	gaps outer 08
+	gaps inner 04
+	gaps outer 03
 	smart_borders on
 
 # Set background each time i3 starts up and theme to shell
 
-	exec_always --no-startup-id wal -i ~/wall.jpg
-	exec_always --no-startup-id feh --bg-fill  ~/wall.jpg
+	#exec_always --no-startup-id wal -i ~/wall.jpg
+	exec_always --no-startup-id feh --bg-fill  ~/Downloads/Telegram\ Desktop/wall.jpg
 
 # Start polybar by running script
 
-	exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+	#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Start compton
 
-	exec_always --no-startup-id compton -b --inactive-opacity 0.65
+	exec_always --no-startup-id compton -i 0.8 -b --config ~/.config/compton/compton.conf
+
+
+#--inactive-opacity 0.65
+
 
 # Screenshot
 
-	bindsym $mod+x exec --no-startup-id scrot
+	bindsym $mod+x exec --no-startup-id scrot & rofi -e "Scrot" -theme Monokai -width 20 -hide-scrollbar -font "Courier 10"
 
 # Lock screen
 
-	bindsym $mod+Shift+x exec --no-startup-id i3lock -k -B=sigma --blur=sigma --veriftext="WAIT" --noinputtext="NO" --wrongtext="NOPE" --bar-indicator --bar-orientation="vertical"
+	bindsym $mod+Shift+x exec --no-startup-id i3lock-fancy
+	#bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/wall.jpg
+	#bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/OtherStuff/WallP/npb.jpg 
+	#-c "000000" This option sets the screen black. imma put an image up there.
 
 # Load Xdefaults
 
-	exec_always --no-startup-id xrdb -load ~/.Xdefaults
-
-# Load Xresources
-
-	exec_always --no-startup-id xrdb -load ~/.Xresources 
+	#exec_always --no-startup-id xrdb -load ~/.Xresources 
 
 # At last I feel like I need to run FileMgr with a keybinding. Just because I can.
 
 	bindsym $mod+Shift+f exec --no-startup-id thunar
 
-# Open a god damned urxvt window to run random commands when i feel like doing it??? (I cannot apply floating to xst after opening it because the latency that comes with opening a window makes the floating enable command to be applied to a different window and thus proved to be very unsuccesful way of doing it and thus I am using another terminal emulator and then applying to it the floating enable attribute and now every time I open urxvt, its going to be in a floating window. I saw 500 days of summer today, She left him for a guy she met at the coffeeshop? I mean what the fuck? I felt bad for him. I know. I shouldnt judge her so I am leaving it alone for now.) <<< Pam Para PAMmm ! >>> <oo> ooh ! Juicy. 
 
-	bindsym $mod+Shift+d exec --no-startup-id  urxvt
 
-	# enable floating mode for all XTerm windows
+	# <RAMBLE> #
 
-	for_window [class="URxvt"] floating enable
+# Unknown Date - Naduvattam
+#
+#  Open a god damned urxvt window to run random commands when i feel like doing it??? 
+#  (I cannot apply floating to xst after opening it because the latency that comes with
+#  opening a window makes the floating enable command to be applied to a different window 
+#  and thus proved to be very unsuccesful way of doing it and thus I am using another 
+#  terminal emulator and then applying to it the floating enable attribute and now every
+#  time I open urxvt, its going to be in a floating window. I saw 500 days of summer 
+#  today, She left him for a guy she met at the coffeeshop? I mean what the fuck? I felt 
+#  bad for him. I know. I shouldnt judge her so I am leaving it alone for now.) 
+#
+# 15-05-2020 - Palam Ext. Delhi
+#  
+#  People are the same everywhere. Or at least that's what they used to say. I am not
+#  sure what they meant. Were they talking about how people used to be to each other ?
+
+#  <<< Pam Para PAMmm ! >>> <oo> ooh ! Juicy. 
+
+
+
+	# </RAMBLE> #
+
+
+
+
+
+# Get that old terminal thing going.
+
+	bindsym $mod+Shift+d exec --no-startup-id cool-retro-term
+
+# enable floating mode for all XTerm windows
+
+	for_window [class="xterm"] floating enable
 	
-	# Make all urxvts use a 1-pixel border:
+# Make all urxvts use a 1-pixel border:
 
-	for_window [class="URxvt"] border pixel4
+	for_window [class="xterm"] border pixel4
 
-	
-	
+# key binding for connmanctl-gtk, to manage all connections.
 
+	bindsym $mod+Shift+w exec --no-startup-id cmst
 
-# ===== A FLYING FUCK  =====
+# start guacamole
+
+	bindsym $mod+Shift+g exec --no-startup-id /usr/bin/chromium --profile-directory=Default --app-id=eemamjldpgfeehjfelakeipjajgokdnm
+
+# start Linkstatus
+
+	bindsym $mod+Shift+s exec --no-startup-id /usr/bin/chromium --profile-directory=Default --app-id=dcnkgdpaknlkbehgneahpeemdincilpk
+
+# start mail - thunderbird
+
+	bindsym $mod+Shift+m exec --no-startup-id thunderbird
+
+# start firefox
+
+	bindsym $mod+Shift+b exec --no-startup-id firefox
+
+# start nm-applet
+
+	exec_always --no-startup-id nm-applet 
+
+# start gomuks
+
+	bindsym $mod+Shift+z exec --no-startup-id konsole -e bash -c "gomuks"; 
+
+# ===== A FLYING FUCK, I DO GIVE ===== #
