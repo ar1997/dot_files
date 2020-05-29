@@ -348,4 +348,4 @@ font pango:Noto Mono Regular 13
 
 	bindsym $mod+Shift+z exec --no-startup-id konsole -e bash -c "gomuks"; 
 
-# ===== A FLYING FUCK, I DO GIVE ===== #
+# ===== (*w*) ===== #
